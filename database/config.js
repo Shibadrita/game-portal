@@ -1,4 +1,7 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from "sequelize"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const sequelize = new Sequelize(
     'online_game_portal',
@@ -9,9 +12,5 @@ const sequelize = new Sequelize(
         dialect: 'mysql'
     }
 )
-
-sequelize.authenticate()
-    .then(() => console.log('database connected'))
-    .catch(() => console.log('database connection failed'))
 
 export default sequelize
