@@ -1,17 +1,17 @@
 import { Router } from "express"
 import { header } from "express-validator"
-import { findOneUser, findAllUsers } from "../controllers/user"
+import { findOneUserHandler, findAllUsersHandler } from "../controllers/user"
 
 const userRouter = Router()
 
 userRouter.get('/:id',
     header('Authentication').notEmpty(),
-    findOneUser
+    findOneUserHandler
 )
 
 userRouter.get('/',
     header('Authentication').notEmpty(),
-    findAllUsers
+    findAllUsersHandler
 )
 
 export default userRouter
