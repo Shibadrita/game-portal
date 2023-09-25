@@ -12,7 +12,8 @@ sequelize.authenticate()
     .catch(err => console.error('database connection failed', err))
 
 app.use(express.json())
+
 app.use('/', authRouter)
 app.use('/users', userRouter)
 
-app.listen((process.env.PORT, () => console.log("server in on")))
+app.listen(process.env.PORT, () => console.log("server in on"))
