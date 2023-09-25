@@ -1,6 +1,5 @@
 import { DataTypes, UUIDV4 } from "sequelize"
 import sequelize from "../database/config.js"
-import bcrypt from "bcrypt"
 
 const User = sequelize.define('users', {
     id: {

@@ -1,5 +1,5 @@
 import sequelize from "../database/config.js"
-import User from "../models/user.js"
+import User from "../models/User.js"
 import catchAsync from "../errors/async.js"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
