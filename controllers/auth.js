@@ -6,7 +6,6 @@ import bcrypt from "bcrypt"
 
 export const signupHandler = catchAsync(async (req, res) => {
     const { email, password } = req.body
-    console.log(req.body)
     await sequelize.sync()
     const hashed = await bcrypt.hash(password, 10)
     await User.create({ email, password: hashed })
