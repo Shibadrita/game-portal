@@ -7,13 +7,14 @@ import bcrypt from "bcrypt"
 export const signupHandler = catchAsync(async (req, res) => {
     const { email, password } = req.body
     await sequelize.sync()
+    const user = await User.findOne({ where: { email } })
+    if (user) throw new Error('You are already registered')
     const hashed = await bcrypt.hash(password, 10)
-    await User.create({ email, password: hashed })
-    const { id } = await User.findOne({ email })
+    const { id } = await User.create({ email, password: hashed })
     const token = jwt.sign({ id }, process.env.TOKENSECRET)
     res.status(201).json({
         success: true,
-        message: 'User signed up successfully',
+        message: 'You signed up successfully',
         data: { token }
     })
 })
@@ -21,18 +22,14 @@ export const signupHandler = catchAsync(async (req, res) => {
 export const signinHandler = catchAsync(async () => {
     const { email, password } = req.body
     await sequelize.sync()
-    const user = await User.findOne({ email })
-    if (!user) {
-        throw new Error('User does not exist')
-    }
+    const user = await User.findOne({ where: { email } })
+    if (!user) throw new Error('You are not registered')
     const { id, password: savedPw } = user
-    if (!bcrypt.compare(password, savedPw)) {
-        throw new Error('Password is incorrect')
-    }
+    if (!bcrypt.compare(password, savedPw)) throw new Error('Password is incorrect')
     const token = jwt.sign({ id }, process.env.TOKENSECRET)
     res.status(200).json({
         success: true,
-        message: 'User signed in successfully',
+        message: 'You signed in successfully',
         data: { token }
     })
 })

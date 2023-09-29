@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { body, header } from "express-validator"
-import { addPlayHandler } from "../controllers/play"
+import { addPlayHandler } from "../controllers/play.js"
+import { isAuthenticated } from "../middlewares/auth.js"
 
 const playRouter = Router()
 
@@ -9,6 +10,7 @@ playRouter.post('/',
     body('userId').notEmpty(),
     body('score').notEmpty(),
     header('Authentication').notEmpty(),
+    isAuthenticated,
     addPlayHandler
 )
 
