@@ -1,6 +1,6 @@
 const catchAsync = handler => {
-    return (req, res) => {
-        handler(req, res).catch(err => {
+    return (req, res, next) => {
+        handler(req, res, next).catch(err => {
             const response = {
                 success: false,
                 message: err.message

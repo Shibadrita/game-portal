@@ -31,20 +31,19 @@ const User = sequelize.define('users', {
     lastname: {
         type: DataTypes.STRING,
     },
+    fullname: {
+        type: DataTypes.STRING,
+        get() {
+            return this.getDataValue('firstname') + ' ' + this.getDataValue('lastname')
+        },
+        set(value) {
+            throw new Error(`'fullname' is virtual property and cannot be set to ${value}`)
+        }
+    },
     phone: {
         type: DataTypes.INTEGER,
     },
     reputation: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-    },
-    won: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-    },
-    lost: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0

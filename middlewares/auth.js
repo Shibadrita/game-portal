@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken"
 import catchAsync from "../errors/async.js"
 
 export const isAuthenticated = catchAsync(async (req, res, next) => {
-    const { Authentication } = req.headers
-    const token = Authentication.split(' ')[1]
+    const { authorization } = req.headers
+    const token = authorization.split(' ')[1]
     const { id } = jwt.verify(token, process.env.TOKENSECRET)
     await sequelize.sync()
     const user = await User.findOne({ where: { id } })

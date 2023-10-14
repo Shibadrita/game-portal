@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import cors from "cors"
 import sequelize from "../database/config.js"
 import authRouter from "../routers/authRouter.js"
 import userRouter from "../routers/userRouter.js"
@@ -13,6 +14,7 @@ sequelize.authenticate()
     .then(() => console.log('database connected'))
     .catch(err => console.error('database connection failed', err))
 
+app.use(cors())
 app.use(express.json())
 
 app.use('/', authRouter)

@@ -19,7 +19,7 @@ export const signupHandler = catchAsync(async (req, res) => {
     })
 })
 
-export const signinHandler = catchAsync(async () => {
+export const signinHandler = catchAsync(async (req, res) => {
     const { email, password } = req.body
     await sequelize.sync()
     const user = await User.findOne({ where: { email } })
@@ -34,6 +34,6 @@ export const signinHandler = catchAsync(async () => {
     })
 })
 
-export const signoutHandler = catchAsync(() => {
+export const signoutHandler = catchAsync((req, res) => {
 
 })

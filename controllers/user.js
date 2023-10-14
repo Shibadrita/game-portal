@@ -4,6 +4,7 @@ import catchAsync from "../errors/async.js"
 
 export const findOneUserHandler = catchAsync(async (req, res) => {
     const { id } = req.params
+    console.log(id)
     await sequelize.sync()
     const user = await User.findOne({ where: { id } })
     if (!user) throw new Error('User not found!')

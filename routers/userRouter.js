@@ -6,13 +6,13 @@ import { isAuthenticated } from "../middlewares/auth.js"
 const userRouter = Router()
 
 userRouter.get('/:id',
-    header('Authentication').notEmpty(),
+    header('authentication').notEmpty(),
     isAuthenticated,
     findOneUserHandler
 )
 
 userRouter.get('/',
-    header('Authentication').notEmpty(),
+    header('authentication').notEmpty(),
     isAuthenticated,
     findAllUsersHandler
 )
