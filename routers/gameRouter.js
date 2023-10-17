@@ -1,13 +1,14 @@
 import { Router } from "express"
 import { body, header } from "express-validator"
-import { addGameHandler } from "../controllers/game.js"
+import { addGameHandler, getGameHandler } from "../controllers/game.js"
 import { isAuthenticated } from "../middlewares/auth.js"
 
 const gameRouter = Router()
 
-gameRouter.get('/',
+gameRouter.get('/:slug',
     header('authentication').notEmpty(),
-
+    isAuthenticated,
+    getGameHandler
 )
 
 gameRouter.post('/',
