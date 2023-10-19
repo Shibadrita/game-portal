@@ -6,7 +6,7 @@ import { isAuthenticated } from "../middlewares/auth.js"
 const gameRouter = Router()
 
 gameRouter.get('/:slug',
-    header('authentication').notEmpty(),
+    header('authorization').notEmpty(),
     isAuthenticated,
     getGameHandler
 )
@@ -14,7 +14,7 @@ gameRouter.get('/:slug',
 gameRouter.post('/',
     body('name').notEmpty(),
     body('instructions').notEmpty(),
-    header('authentication').notEmpty(),
+    header('authorization').notEmpty(),
     isAuthenticated,
     addGameHandler
 )

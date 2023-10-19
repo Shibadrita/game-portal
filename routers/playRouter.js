@@ -9,7 +9,7 @@ playRouter.post('/',
     body('gameId').notEmpty(),
     body('userId').notEmpty(),
     body('score').notEmpty(),
-    header('Authentication').notEmpty(),
+    header('authorization').notEmpty(),
     isAuthenticated,
     addPlayHandler
 )

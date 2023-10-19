@@ -17,7 +17,7 @@ authRouter.post('/signin',
 )
 
 authRouter.post('/signout',
-    header('Authentication').notEmpty(),
+    header('authorization').notEmpty(),
     signoutHandler
 )
 
