@@ -1,9 +1,15 @@
 import { Router } from "express"
 import { body, header } from "express-validator"
-import { addPlayHandler } from "../controllers/play.js"
+import { getGameScoresHandler, addPlayHandler } from "../controllers/play.js"
 import { isAuthenticated } from "../middlewares/auth.js"
 
 const playRouter = Router()
+
+playRouter.get('/:id',
+    header('authorization').notEmpty(),
+    isAuthenticated,
+    getGameScoresHandler
+)
 
 playRouter.post('/',
     body('gameId').notEmpty(),
